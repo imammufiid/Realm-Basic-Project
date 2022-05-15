@@ -1,0 +1,62 @@
+dependencies {
+    // kotlin stdlib
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "androidx.core:core-ktx:$coreKTXVersion"
+
+    // Android UI and appcompat
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+    implementation "com.google.android.material:material:$materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+    implementation "androidx.fragment:fragment-ktx:$fragmentKTXVersion"
+    implementation "androidx.legacy:legacy-support-v4:$legacySupportVersion"
+    implementation "androidx.cardview:cardview:$cardViewVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    // network & serialization
+    implementation "com.squareup.retrofit2:converter-gson:$converterGSONVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingInterceptorVersion"
+
+    // image
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+    implementation "de.hdodenhof:circleimageview:$circleImageVersion"
+
+    // Dependency Injection
+    implementation "io.insert-koin:koin-core:$koinVersion"
+    implementation "io.insert-koin:koin-android:$koinVersion"
+
+    // rxJava3
+    // "io.reactivex.rxjava3:rxandroid:$rxJavaVersion"
+    // "io.reactivex.rxjava3:rxjava:$rxJavaVersion"
+    // "com.squareup.retrofit2:adapter-rxjava3:$adapterRxJavaVersion"
+
+    // Bottom Navigation Chips
+    // implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
+
+    // Firebase
+    implementation "com.google.firebase:firebase-crashlytics:$crashlyticsVersion"
+    implementation "com.google.firebase:firebase-analytics:$analyticsVersion"
+
+    // view model and live data
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
+
+    // paging
+    implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+    implementation "androidx.room:room-paging:2.5.0-alpha01"
+
+    // Data Store
+    implementation "androidx.datastore:datastore-preferences:$dataStoreVersion"
+    implementation "androidx.datastore:datastore:$dataStoreVersion"
+
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
+    testImplementation "androidx.arch.core:core-testing:$archLifecycleVersion"
+
+    androidTestImplementation "androidx.test.ext:junit:$extJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCoreVersion"
+    androidTestImplementation "androidx.test:runner:$androidxTestVersion"
+    androidTestImplementation "androidx.test:core-ktx:$androidxTestVersion"
+}
