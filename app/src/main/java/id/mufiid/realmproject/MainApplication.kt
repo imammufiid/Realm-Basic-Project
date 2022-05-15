@@ -14,7 +14,7 @@ import org.koin.core.logger.Level
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-
+        Realm.init(this)
         startKoin {
             androidLogger(Level.NONE)
             androidContext(this@MainApplication)
