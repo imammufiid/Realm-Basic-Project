@@ -1,7 +1,7 @@
 package id.mufiid.realmproject.core.di
 
 import id.mufiid.realmproject.core.data.repository.MainRepository
-import id.mufiid.realmproject.core.data.source.local.MainLocalDataSource
+import id.mufiid.realmproject.core.data.source.local.PetLocalDataSource
 import id.mufiid.realmproject.core.domain.repository.IMainRepository
 import io.realm.RealmConfiguration
 import org.koin.dsl.module
@@ -17,9 +17,9 @@ val databaseModule = module {
 }
 
 val localDataSourceModule = module {
-    single { MainLocalDataSource() }
+    single { PetLocalDataSource(get()) }
 }
 
 val repositoryModule = module {
-    single<IMainRepository> { MainRepository() }
+    single<IMainRepository> { MainRepository(get()) }
 }
