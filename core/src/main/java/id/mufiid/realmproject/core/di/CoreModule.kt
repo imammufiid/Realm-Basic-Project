@@ -2,6 +2,8 @@ package id.mufiid.realmproject.core.di
 
 import id.mufiid.realmproject.core.data.repository.MainRepository
 import id.mufiid.realmproject.core.data.source.local.PetLocalDataSource
+import id.mufiid.realmproject.core.data.source.local.realm.PetDao
+import id.mufiid.realmproject.core.data.source.local.realm.PetDaoImpl
 import id.mufiid.realmproject.core.domain.repository.IMainRepository
 import io.realm.RealmConfiguration
 import org.koin.dsl.module
@@ -14,6 +16,10 @@ val databaseModule = module {
             // .migration()
             .build()
     }
+}
+
+val realmDaoModule = module {
+    single<PetDao> { PetDaoImpl(get()) }
 }
 
 val localDataSourceModule = module {

@@ -9,9 +9,5 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 
 class MainRepository(private val petLocalDataSource: PetLocalDataSource): IMainRepository {
-    override fun getPets(): Flow<List<Pet>> {
-        return flow {
-            emit(petLocalDataSource.retrievePetsToAdopt())
-        }.flowOn(IO)
-    }
+    override fun getPets() = petLocalDataSource.retrievePetsToAdopt()
 }

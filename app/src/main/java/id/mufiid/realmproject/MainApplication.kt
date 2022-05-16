@@ -3,6 +3,7 @@ package id.mufiid.realmproject
 import android.app.Application
 import id.mufiid.realmproject.core.di.databaseModule
 import id.mufiid.realmproject.core.di.localDataSourceModule
+import id.mufiid.realmproject.core.di.realmDaoModule
 import id.mufiid.realmproject.core.di.repositoryModule
 import id.mufiid.realmproject.di.viewModelModules
 import io.realm.Realm
@@ -22,6 +23,7 @@ class MainApplication : Application() {
                 listOf(
                     viewModelModules,
                     databaseModule,
+                    realmDaoModule,
                     localDataSourceModule,
                     repositoryModule
                 )

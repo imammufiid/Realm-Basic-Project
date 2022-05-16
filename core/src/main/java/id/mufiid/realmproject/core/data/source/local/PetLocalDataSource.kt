@@ -1,58 +1,26 @@
 package id.mufiid.realmproject.core.data.source.local
 
-import id.mufiid.realmproject.core.data.source.local.entity.OwnerRealm
-import id.mufiid.realmproject.core.data.source.local.entity.PetRealm
-import id.mufiid.realmproject.core.data.source.local.entity.toDomain
+import id.mufiid.realmproject.core.data.source.local.realm.PetDao
 import id.mufiid.realmproject.core.domain.model.Pet
-import id.mufiid.realmproject.core.domain.model.toRealm
-import io.realm.Realm
-import io.realm.RealmConfiguration
-import io.realm.kotlin.executeTransactionAwait
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 
-class PetLocalDataSource(private val config: RealmConfiguration) {
-    private fun getRealm() = Realm.getInstance(config)
+class PetLocalDataSource(private val petDao: PetDao) {
 
     suspend fun insertPet(pet: Pet) {
-        getRealm().executeTransactionAwait(IO) { transaction ->
-            transaction.insertOrUpdate(pet.toRealm())
-        }
+        petDao.insertPet(pet)
     }
 
-    suspend fun retrievePetsToAdopt(): List<Pet> {
-        val petsToAdopt = mutableListOf<Pet>()
-        getRealm().executeTransactionAwait(IO) { transaction ->
-            petsToAdopt.addAll(
-                transaction.where(PetRealm::class.java)
-                    .equalTo("isAdopted", false)
-                    .findAll()
-                    .map { it.toDomain() }
-            )
-        }
-        return petsToAdopt
-    }
+    fun retrievePetsToAdopt() = flow {
+        emit(petDao.retrievePetsToAdopt())
+    }.flowOn(IO)
 
     suspend fun updatePet(petId: String, ownerId: String) {
-        getRealm().executeTransactionAwait(IO) { transaction ->
-            val pet = transaction.where(PetRealm::class.java)
-                .equalTo("id", petId)
-                .findFirst()
-
-            val owner = transaction.where(OwnerRealm::class.java)
-                .equalTo("id", ownerId)
-                .findFirst()
-
-            pet?.isAdopted = true
-            owner?.pets?.add(pet)
-        }
+        petDao.updatePet(petId, ownerId)
     }
 
     suspend fun removePet(petId: String) {
-        getRealm().executeTransactionAwait(IO) { transaction ->
-            val petToRemove = transaction.where(PetRealm::class.java)
-                .equalTo("id", petId)
-                .findFirst()
-            petToRemove?.deleteFromRealm()
-        }
+        petDao.removePet(petId)
     }
 }
